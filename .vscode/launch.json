@@ -1,0 +1,22 @@
+{
+	"configurations": [
+		{
+			"type": "swift",
+			"request": "launch",
+			"args": [],
+			"cwd": "${workspaceFolder:pokedex-api}",
+			"name": "Debug PokedexApi",
+			"program": "${workspaceFolder:pokedex-api}/.build/debug/PokedexApi",
+			"preLaunchTask": "swift: Build Debug PokedexApi"
+		},
+		{
+			"type": "swift",
+			"request": "launch",
+			"args": [],
+			"cwd": "${workspaceFolder:pokedex-api}",
+			"name": "Release PokedexApi",
+			"program": "${workspaceFolder:pokedex-api}/.build/release/PokedexApi",
+			"preLaunchTask": "swift: Build Release PokedexApi"
+		}
+	]
+}

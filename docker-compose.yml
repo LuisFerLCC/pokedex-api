@@ -16,15 +16,15 @@
 #
 
 volumes:
-  db_data:
+  pokedex_db:
 
 x-shared_environment: &shared_environment
   LOG_LEVEL: ${LOG_LEVEL:-debug}
   DATABASE_HOST: db
-  DATABASE_NAME: vapor_database
-  DATABASE_USERNAME: vapor_username
-  DATABASE_PASSWORD: vapor_password
-  
+  DATABASE_NAME: pokedex_db
+  DATABASE_USERNAME: pokedex_db_user
+  DATABASE_PASSWORD: Pokedex
+
 services:
   app:
     image: pokedex-api:latest
@@ -63,11 +63,11 @@ services:
   db:
     image: mysql:8
     volumes:
-      - db_data:/var/lib/mysql
+      - pokedex_db:/var/lib/mysql
     environment:
-      MYSQL_USER: vapor_username
-      MYSQL_PASSWORD: vapor_password
-      MYSQL_DATABASE: vapor_database
+      MYSQL_USER: pokedex_db_user
+      MYSQL_PASSWORD: Pokedex
+      MYSQL_DATABASE: pokedex_db
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     ports:
-      - '3306:3306'
+      - '3307:3306'
