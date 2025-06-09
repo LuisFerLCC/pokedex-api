@@ -7,6 +7,18 @@
 
 import Fluent
 
+/// Migración de base de datos que añade la tabla de Pokémon y sus tuplas
+/// iniciales.
+///
+/// Esta migración crea la tabla `Pokemon` con sus columnas constituyentes en la
+/// base de datos. También añade a los primeros 151 Pokémon de la Pokédex
+/// oficial.
+///
+/// Para añadir esta migración a la aplicación, añadimos lo siguiente dentro de
+/// la función ``configure(_:)`` en el archivo _configure.swift_:
+///
+///     app.migrations.add(CreatePokemon())
+///
 struct CreatePokemon: AsyncMigration {
     func prepare(on database: any Database) async throws {
         try await database.schema("Pokemon")
@@ -17,7 +29,7 @@ struct CreatePokemon: AsyncMigration {
             .field("imagen", .string, .required)
             .create()
 
-        let pokemon = data.map { tuple in
+        let pokemon = _data.map { tuple in
             Pokemon(
                 id: nil,
                 nombre: tuple.0,
@@ -39,7 +51,7 @@ struct CreatePokemon: AsyncMigration {
     }
 }
 
-let data = [
+private let _data = [
     (
         "Bulbasaur", "Planta/Veneno",
         "Bulbasaur es un Pokémon de tipo Planta y Veneno. Es conocido por tener una planta en su espalda que crece a medida que evoluciona.",
